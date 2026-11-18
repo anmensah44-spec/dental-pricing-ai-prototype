@@ -15,7 +15,7 @@ Path('dist/model.json').write_text(json.dumps(model,indent=2)+'\n');print(json.d
 import hashlib, csv, platform
 out=Path('evidence');out.mkdir(exist_ok=True)
 with (out/'synthetic_costs.csv').open('w',newline='') as f:
-    w=csv.writer(f);w.writerow(['split','family','chair_minutes','lab_cost_usd','target_cost_usd'])
+    w=csv.writer(f,lineterminator="\n");w.writerow(['split','family','chair_minutes','lab_cost_usd','target_cost_usd'])
     for i in range(n):
         w.writerow(['train' if i<900 else 'calibration' if i<1150 else 'test', 'CROWN01' if crown[i] else 'FILL01',format(minutes[i],'.17g'),format(lab[i],'.17g'),format(y[i],'.17g')])
 baseline=np.full(250,float(y[train].mean()))

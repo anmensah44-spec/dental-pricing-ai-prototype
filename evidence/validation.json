@@ -9,6 +9,6 @@
   },
   "model_reproduction": "PASS",
   "markdown_local_links": "PASS",
-  "github_actions": "NOT_RUN: repository unavailable",
+  "github_actions": "Run #1: pricing passed; model checksum failed after CSV newline normalization in upload. Fixed generator to use LF; rerun pending.",
   "production_validation": "NOT_RUN"
 }

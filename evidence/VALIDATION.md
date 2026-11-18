@@ -9,7 +9,7 @@ Executed on 2026-11-18 against this portfolio source, not a production system.
 | Model reproduction | Archived data checksum, coefficients and held-out MAE verified |
 | Synthetic baseline comparison | Ridge held-out MAE below training-mean baseline |
 | Markdown local links | All referenced local files resolved |
-| GitHub Actions | Configured; not executed because destination repository does not exist |
+| GitHub Actions | Run #1: pricing passed; model checksum failed after CSV newline conversion. Generator standardized to LF; rerun pending. |
 | Current UI regression | Not re-executed this release; UI unchanged from earlier preview |
 | Real integration / load / security / clinical / lender acceptance | Not implemented or validated |
 

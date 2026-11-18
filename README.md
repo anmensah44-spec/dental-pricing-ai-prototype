@@ -65,6 +65,6 @@ AI estimates uncertain costs. A deterministic optimizer and exact arithmetic enf
 
 ## Scope and evidence limits
 
-Only filling and crown demo families are executable; the broader treatment lifecycle is a future design. No live EHR, CRM, payer, payment, banking or Zest AI integration exists. No credit underwriting or clinical diagnosis occurs. Browser storage is user-editable and is not an immutable audit log. Synthetic test accuracy is not a real-world performance claim. Local tests have been executed; GitHub Actions execution remains pending publication.
+Only filling and crown demo families are executable; the broader treatment lifecycle is a future design. No live EHR, CRM, payer, payment, banking or Zest AI integration exists. No credit underwriting or clinical diagnosis occurs. Browser storage is user-editable and is not an immutable audit log. Synthetic test accuracy is not a real-world performance claim. Local tests have been executed; GitHub Actions run #1 was started after publication; see evidence/VALIDATION.md for its verified result.
 
 See [documentation index](docs/INDEX.md), [security](SECURITY.md), [changelog](CHANGELOG.md), and [usage terms](LICENSE).

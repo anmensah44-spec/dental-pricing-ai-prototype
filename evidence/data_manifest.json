@@ -1,6 +1,6 @@
 {
   "dataset": "synthetic_costs.csv",
-  "sha256": "2ce618be50b813e897dcc0eb051f3a464c7cc1fce9aece5fa504d40ca93b1ca4",
+  "sha256": "b42d0fa132cd190ac0227636b5735db967afc5995bd0895016dd48c228e018d2",
   "generator": "scripts/train_model.py",
   "python": "3.12.14",
   "numpy": "2.3.5",
