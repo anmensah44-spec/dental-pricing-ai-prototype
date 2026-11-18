@@ -29,7 +29,16 @@
       "audit chain verification"
     ]
   },
-  "github_ci": "PENDING publication of v2",
+  "github_ci": {
+    "status": "SUCCESS",
+    "run_id": 44364313774,
+    "tested_commit": "64d87b60dce028230074151290491226565f27ba",
+    "jobs": [
+      "application",
+      "models"
+    ],
+    "url": "https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44364313774"
+  },
   "not_executed": [
     "Docker build/run",
     "penetration test",
@@ -37,5 +46,10 @@
     "full accessibility audit",
     "live vendor integration",
     "production clinical validation"
-  ]
+  ],
+  "source_verification": {
+    "published_files": 63,
+    "mismatches": 0,
+    "method": "Git blob hashes matched local tracked source before this documentation-only update"
+  }
 }
