@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="login rate limiter blocks repeated invalid attempts without crashing health checks" time="0.387490" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/access.test.mjs"/>
+	<testcase name="concurrent retries commit exactly one clinical draft and one audit event" time="0.314311" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/access.test.mjs"/>
+	<testcase name="online SQLite backup can restore records and refuses overwrite" time="0.004135" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/backup.test.mjs"/>
+	<testcase name="basis point arithmetic rounds ties half up in cents" time="0.001248" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="clinical approval and freshness cannot be bypassed" time="0.000467" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="unsupported model configurations route review" time="0.000323" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="self pay result respects exact balance and risk margin" time="0.011111" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="infeasible self pay treatment cannot loosen price cap" time="0.000750" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="loyalty applied once and exact net preserved" time="0.005732" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="payer contract is fixed and incompatible loyalty withheld" time="0.000183" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="financing expense applies to remaining balance after payer and deposit" time="0.000180" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="overpayment and invalid deposit do not create negative funding" time="0.014094" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="calibrated upper bound exceeds prediction; deterministic predictions" time="0.001583" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="financing states represent simulator workflow not automatic credit qualification" time="0.000180" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="unsafe deposit integers and fractional cents are rejected" time="0.000265" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="corrupted artifacts cannot issue a quote" time="0.000183" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="boundary support and incompatible feature combinations fail closed" time="0.000317" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="scenario sweep reconciles every issued result and enforces all self-pay constraints" time="0.176683" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/engine.test.mjs"/>
+	<testcase name="exact decimal parsing rejects rounding, signs, scientific notation and excess precision" time="0.001348" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+	<testcase name="all 16 treatment families reconcile and respect permitted fee and margin constraints" time="0.218386" classname="test" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+	<testsuite name="server integration and complete synthetic patient journeys" time="1.090070" disabled="0" errors="0" tests="15" failures="0" skipped="0" timestamp="2026-11-18T17:54:35.552Z" hostname="0e2b72721652">
+		<testcase name="authentication, CSRF, origin isolation, content limits and static path protections" time="0.023244" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="CRM validation, explicit consent, roles and patient record isolation" time="0.016707" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="only a clinician approves; approval and source freshness enforced on server" time="0.011498" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="quote idempotency prevents duplicates and rejects conflicting key reuse" time="0.010983" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="acceptance requires consent, correct role, active version and immutable money" time="0.008582" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="complete financing submission, provider offer, separate acceptance and funding" time="0.019989" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="refund reverses simulated funding; direct payment reconciles the outstanding balance" time="0.005475" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="decline and withdrawal are terminal, duplicate/out-of-order events fail" time="0.044849" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="review route cannot become issued through a reviewer disposition" time="0.010197" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="future appointment cannot complete early; all visits complete the pathway" time="0.013400" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="expiry and cancellation block acceptance and funding" time="0.347943" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="accepted plans cannot be repriced; alternate quotes and active financing cannot bypass lifecycle" time="0.034805" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="decision export and database audit chain are verifiable and append only" time="0.005397" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="SQLite records, sessions and audit survive a server restart" time="0.013481" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+		<testcase name="logout revokes session and health endpoint reports storage integrity" time="0.006802" classname="server integration and complete synthetic patient journeys" file="/workspace/projects/dental-pricing-ai-prototype/tests/server.test.mjs"/>
+	</testsuite>
+	<!-- tests 36 -->
+	<!-- suites 0 -->
+	<!-- pass 36 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 2778.577108 -->
+</testsuites>

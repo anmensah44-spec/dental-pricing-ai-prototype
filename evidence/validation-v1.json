@@ -1,0 +1,23 @@
+{
+  "executed_utc": "2026-11-18T17:09:50.857755+00:00",
+  "node": "v24.22.3",
+  "python": "Python 3.12.14",
+  "engine_tests": {
+    "passed": 15,
+    "failed": 0,
+    "scenario_sweep_cases": 128
+  },
+  "model_reproduction": "PASS",
+  "markdown_local_links": "PASS",
+  "github_actions": {
+    "run_id": 44359556265,
+    "conclusion": "success",
+    "tested_commit": "6a852a967697a8ec18193162093be4268988e5c4",
+    "url": "https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44359556265",
+    "jobs": [
+      "pricing",
+      "model"
+    ]
+  },
+  "production_validation": "NOT_RUN"
+}

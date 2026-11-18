@@ -1,3 +1,5 @@
+> Release 2 update: working server-backed synthetic implementation now covers 16 treatment families, CRM, clinical approval, persistent audit, consent, simulated financing settlement and visit tracking. Earlier two-family statements below describe the initial release only. See docs/COMPLETENESS.md for current implementation and external blockers. No real client deployment or business outcomes are claimed.
+
 # Product strategy and delivery roadmap
 
 The differentiation hypothesis is an explainable pricing journey combining learned cost estimation with enforceable policy and traceable exception handling. The prototype demonstrates feasibility on synthetic cases; it does not validate demand or clinical performance.

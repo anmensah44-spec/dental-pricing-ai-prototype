@@ -12,4 +12,4 @@
 - [Contribution statement](../CONTRIBUTIONS.md)
 - [Walkthrough](../demo/WALKTHROUGH.md)
 
-ARCHITECTURE.md in this directory is retained from the original prototype as a supporting implementation note. The explicit implemented/target distinction in architecture/SOLUTION.md is authoritative for this portfolio release.
+The current implementation is documented in architecture/SOLUTION.md. See [completion matrix](COMPLETENESS.md) and [operations](OPERATIONS.md) for runtime scope and recovery.

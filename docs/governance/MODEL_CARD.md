@@ -1,13 +1,9 @@
-# Model and data card
+# Active model and data card — synthetic-multifamily-ridge-2
 
-Model: synthetic-ridge-1. Intended use: illustrate cost-estimation inference in a portfolio demo, not clinical decision-making or real pricing.
+Intended use: a working synthetic reference application, not real clinical, pricing or lending decisions. Features are sixteen treatment intercepts, chair minutes and laboratory cost USD. Active artifact: dist/cost-model.json. The v1 two-family model remains as historical regression evidence.
 
-Features: intercept, crown indicator, chair minutes, lab cost USD. Target: synthetic treatment cost USD. Generation uses NumPy seed 42, 1,400 independent rows, a known linear relationship plus Gaussian noise. Train/calibration/test splits are 900/250/250. Split assignment follows generated row order; it is not a temporal or patient-level split. Data contain no real patient, protected-trait, credit or geographic information.
+The generator scripts/train_enterprise.py produces 4,800 independent synthetic rows: 300 per family. Within each family, 180 train, 60 calibrate and 60 test: total 2,880/960/960. A known category-linear formula plus Gaussian noise generates costs. It is not representative patient/practice data. There are no personal, protected-trait or credit features. Chair/lab support spans 15–180 minutes and $0–$1,500; these are simulation boundaries, not clinical norms.
 
-Ridge penalty is 0.01 on non-intercept coefficients. Calibration uses the higher empirical 90th percentile absolute residual, producing a symmetric interval. This is an illustrative calibrated residual interval, not a finite-sample coverage guarantee or a guaranteed bound on actual costs. The optimizer uses the upper endpoint as a risk estimate; actual costs may exceed it.
+Ridge penalty is 0.01. The empirical higher 90th percentile calibration residual sets a symmetric interval. It is not a guaranteed cost upper bound. Reported held-out MAE is approximately $9.45 and coverage approximately 91.77%, only on this synthetic generator. Family metrics and mean-baseline comparison appear in evidence/multifamily_evaluation.json. scripts/check_enterprise.py independently verifies archived CSV checksum, coefficients, calibration and test error. Linear generation favors ridge and cannot establish real-world superiority.
 
-The evaluation report compares held-out error against a training-mean baseline and reports family-level errors and coverage. It measures performance only on the same synthetic generator. Linear structure favors ridge; these results cannot establish superiority on real dental data. No hyperparameter search, subgroup fairness validation, site holdout, temporal holdout, causal validation or clinical review was conducted.
-
-The dataset CSV and checksum make generation inspectable. No fitted preprocessing is required. A real model needs licensed representative cost data, label definition, leakage checks, missingness/outlier policy, site/time holdouts, baseline comparisons, calibrated uncertainty and agreed error/coverage thresholds by use case. Train/test separation, approvals and artifact signatures must be enforced in a production registry.
-
-LLM/RAG capabilities and image models are future options only. No LLM is invoked by this application. No credit model is trained and no applicant eligibility decision is made.
+A real release requires representative licensed cost labels, clinical and financial validation, site/time/patient holdouts, leakage checks, calibrated uncertainty, subgroup/error monitoring and approved rollback criteria. No credit model, LLM, image model or vendor model is called. Exact arithmetic and policy constraints are deterministic parts of the AI-enabled system.

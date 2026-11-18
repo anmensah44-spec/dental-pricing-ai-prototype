@@ -1,0 +1,12 @@
+services:
+  clarity:
+    build: .
+    ports:
+      - "127.0.0.1:4173:4173"
+    volumes:
+      - clarity-data:/app/data
+    environment:
+      APP_MODE: synthetic
+    restart: unless-stopped
+volumes:
+  clarity-data:

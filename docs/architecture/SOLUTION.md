@@ -1,53 +1,27 @@
-# Solution architecture
-
-## Implemented prototype
+# Implemented solution architecture — release 2
 
 ```mermaid
 flowchart TD
- U[Coordinator browser] --> UI[Static application]
- UI --> E[Pricing engine]
- M[Versioned model JSON] --> E
- E --> P[Learned cost estimate]
- P --> O[Constrained cent search]
- O --> R{Issue or review}
- R --> UI
- UI --> L[Local browser records]
- UI --> F[Financing simulator]
- T[Synthetic training pipeline] --> M
+ UI[Browser workspace] --> H[Node HTTP API]
+ H --> S[Sessions and role checks]
+ S --> C[Clinical and CRM commands]
+ S --> Q[Quote commands]
+ Q --> M[16-family ridge inference]
+ M --> O[Constrained cent optimizer]
+ S --> F[Local finance state machine]
+ C --> D[SQLite transaction store]
+ Q --> D
+ F --> D
+ D --> A[Hash-chain audit]
+ T[Synthetic Python training] --> M
 ```
 
-Browser JavaScript loads the model artifact and runs inference locally. Price selection is exhaustive over the allowed integer-cent interval, with lexicographic tie-breaking. Contract examples are fictional constants. There is no backend, authenticated API, database or real partner connection. Local events and exports support demonstration, not trustworthy audit evidence.
+The backend serves the UI and API from one origin. No CORS access is enabled. Passwords are scrypt-hashed; random session tokens are stored hashed in SQLite with an 8-hour lifetime. CSRF tokens and origin checks protect authenticated writes. Patient queries are scoped to their assigned synthetic patient ID.
 
-## Target enterprise architecture — unimplemented
+Every command runs in a transaction with an actor-scoped idempotency key and payload hash. Reusing a key with a different command yields 409. Entity versions reject stale actions. Clinical plan approval is restricted to clinician; admin cannot approve. Issued prices remain fixed through acceptance and financing; only one estimate can be accepted per plan. Financing funds cannot exceed unpaid balance. Active financing must be withdrawn/refunded before plan cancellation.
 
-```mermaid
-flowchart TD
- UI[Patient and staff portals] --> G[Identity and API gateway]
- G --> Q[Quote orchestration]
- Q --> C[Clinical and CRM adapters]
- Q --> B[Benefits and contract service]
- Q --> I[Model inference]
- I --> V[Registry and feature validation]
- Q --> O[Policy constrained optimizer]
- O --> D[Versioned decision ledger]
- Q --> L[Lender adapter]
- L --> X[Bank decision authority]
- D --> A[Audit and monitoring]
- V --> A
-```
+SQLite entities persist patients, plans, quotes, finance applications and payment entries. Quote ledger values derive from payments and funded applications. Audit records are append-only through SQL triggers, linked by SHA-256. This is tamper-evident under ordinary application access; a privileged database owner can rewrite the database and chain. No cryptographic external anchoring is claimed.
 
-An orchestration service would bind approved treatment, contract snapshot, feature provenance, model version and policy version to each decision. Request keys, transaction boundaries and durable state transitions would prevent duplicate quotes and financing submissions. Corrections create new versions; accepted estimates require explicit adjustment workflows.
+The lender provider-event command is restricted to the local simulator and admin role; it is not a bank webhook or real integration. There are no live EHR, payer, external CRM, Synchrony or Zest adapters. This application is single-organization, single-instance and synthetic-only. Target enterprise scale, identity, data rights and real integrations remain in the completion matrix.
 
-Zest AI would be a lender-approved integration only if supported by contractual and technical discovery. Synchrony is a proposed lender, not an implemented dependency. CRM is an engagement system; clinical records, contracts, model artifacts and financial decisions need separately authoritative sources.
-
-## Decisions and tradeoffs
-
-| Decision | Rationale | Limitation |
-|---|---|---|
-| Static app | Easy inspection, no secrets or service costs | Cannot enforce access or protect real records |
-| Ridge model | Transparent coefficients and reproducibility | Synthetic linear generator favors this model |
-| Exact cent search | Inspectable feasible optimum for small interval | Benchmark a scalable solver for larger baskets |
-| Policy arithmetic outside ML | Reconciles exact balances and constraints | Policies require governed versioning |
-| Simulated bank | Demonstrates workflow without vendor access | No qualification or real offers |
-
-Production must address availability, isolation, audit integrity, retry semantics, signed policy approvals, model rollback, disaster recovery, accessibility and operational capacity. These have not been validated by the prototype.
+Legacy engine.mjs and model.json are retained for v1 regression evidence. The active server uses server/pricing.mjs and dist/cost-model.json. Legacy browser code is archived under demo/ and is not served.

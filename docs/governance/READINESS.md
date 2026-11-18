@@ -1,24 +1,16 @@
-# Governance, vendor readiness and production gaps
+# Governance and vendor readiness
 
-Status: synthetic demonstration only. No gate below is approved by publication of this repository.
+The synthetic application is implemented and tested within the boundaries stated in docs/COMPLETENESS.md. Original static-only gaps in authentication, durable storage, workflow enforcement and local audit have been addressed in release 2. These controls do not constitute enterprise operational or legal approval.
 
-| Priority | Gap / required evidence | Proposed owner |
+| External production gate | Evidence needed | Accountable role |
 |---|---|---|
-| Critical | Clinical workflow and authority approval; actual treatment policies | Clinical lead |
-| Critical | Finance-approved fees, margin, discount and contract rules | Finance / revenue cycle |
-| Critical | Representative licensed data; independent model validation | Data science / model risk |
-| Critical | Access control, encryption, consent, retention, audit integrity | Security / privacy |
-| Critical | Bank agreements, authorized APIs and lender decision boundary | Legal / lender relationship owner |
-| High | EHR, CRM and payer mappings with reconciliation | Integration engineering / BA |
-| High | Versioned quote/acceptance state and transaction/idempotency guarantees | Backend engineering |
-| High | Monitoring, drift thresholds, rollback and human fallback | MLOps / operations |
-| High | Load, accessibility, recovery and threat-model tests | QA / platform engineering |
-| High | Customer research and measured pilot business case | Product / finance |
+| Clinical authority | Signed treatment workflows, actual coding and clinical record permissions | Clinical leadership |
+| Financial policy | Approved fees, margins, discounts, real payer contracts and reconciliation | Finance / revenue cycle |
+| Data/model validity | Licensed representative labels, independent validation and monitoring | Data science / model risk |
+| Identity/privacy/security | SSO/MFA, provisioning, real consent/retention requirements, threat and privacy review | Security / privacy |
+| Lending | Bank contract, authorized sandbox/API, decision authority and Zest compatibility | Lender / legal / integration owner |
+| Operations | Hosted environment, backups, recovery objectives, capacity, incident staffing and release approvals | Platform / operations |
 
-Vendor evaluation must confirm supported use case, API availability, sandbox, decision ownership, data processing terms, sub-processors, model-change notifications, SLAs, incident response, portability, costs and exit strategy. Synchrony and Zest AI names express design intent only. No access or compatibility is assumed.
+Synchrony and Zest AI remain intended partners from the design discussion. API availability, product compatibility, access rights and commercial agreements were not supplied. Local provider events are clearly simulated. Geographic expansion needs its own clinical, privacy, contract, financial and model review. No globalization approval or compliance certification exists.
 
-Geographic expansion requires separate review of data residency, currencies, local contracts, clinical workflows, languages, financing permissions and model representativeness. Do not deploy US assumptions globally without that review.
-
-Risk: a polished demo may be mistaken for a clinical or banking product. Mitigation: synthetic labels, explicit simulator states and contribution disclosure. Risk: synthetic evaluation may be misread as real performance. Mitigation: publish generator and evidence limits. Risk: browser records can be edited or lost. Mitigation: prohibit real data and require a server ledger before operational use.
-
-Escalate any real-data request or proposed live price/credit decision to the designated business, clinical, privacy and lender owners. This register is a planning document, not a compliance certification.
+The product director owns scope, measurable outcomes and business go/no-go. The BA owns requirements and traceability. Clinical/finance owners approve policies. Engineering owns implementation; independent reviewers validate operation and model outcomes. Those are proposed responsibilities, not signed stakeholder approvals.

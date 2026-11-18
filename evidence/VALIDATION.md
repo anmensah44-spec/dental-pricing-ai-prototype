@@ -1,18 +1,20 @@
-# Validation record
+# Release 2 validation
 
-Executed on 2026-11-18 against this portfolio source, not a production system.
+Executed 2026-11-18 on Node 24.22.3. Full machine-readable test output: test-results-v2.xml; record: validation.json.
 
-| Check | Result |
+| Verification | Result |
 |---|---|
-| npm test | 15 passed; 0 failed |
-| Scenario sweep | 128 combinations across families, duration, benefits, loyalty, financing and deposits |
-| Model reproduction | Archived data checksum, coefficients and held-out MAE verified |
-| Synthetic baseline comparison | Ridge held-out MAE below training-mean baseline |
-| Markdown local links | All referenced local files resolved |
-| GitHub Actions | Run #2: SUCCESS — pricing and model jobs passed at commit 6a852a9. Run #1 detected CSV newline mismatch; fixed before successful rerun. |
-| Current UI regression | Not re-executed this release; UI unchanged from earlier preview |
-| Real integration / load / security / clinical / lender acceptance | Not implemented or validated |
+| Node tests | 36 passed; zero failures |
+| Pricing matrices | 128 legacy configurations + 128 active family configurations |
+| HTTP integration | Role/record isolation, CSRF/origin/content limits, approval, freshness, versions, duplicate commands, consent, finance/funding/refund/payment, reviews, visits, expiry, cancellation, audit and restart |
+| Concurrent retries | 10 simultaneous retries produced exactly one plan and event |
+| Backup recovery | Open WAL database backup recovered records; overwrite refused |
+| ML reproduction | Both archived data checksums, coefficient fits, held-out error, calibration and baselines passed |
+| Actual browser journey | Plan → clinician approval → quote → consent → simulated application → offer → patient offer consent → funding → zero balance |
+| Browser evidence | Actual JSON download, reload persistence and audit-chain verification passed |
+| GitHub CI | Pending publication of v2 |
+| Docker / real integrations / production security, load and clinical acceptance | Not executed or not available |
 
-See validation.json for runtime and timestamp; evaluation.json for synthetic metrics. The screenshot is from an earlier preview, not proof of this release's automated UI tests. This record is not stakeholder sign-off.
+The local browser test used a $1,800 synthetic crown, $500 estimated payer and $100.01 deposit. Simulated funding was $1,199.99; unpaid balance was $0.00. No bank or patient data was used. API tests complete due appointments using an injected test clock; the browser test did not wait through future appointments.
 
-[Verified GitHub Actions run #2](https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44359556265). Subsequent changes to this record and README are documentation-only.
+The old validation-v1.json records the previous release and its successful CI run. It does not certify v2. This record is test evidence, not clinical, legal or executive approval.

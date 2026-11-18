@@ -1,3 +1,5 @@
+> Release 2 update: working server-backed synthetic implementation now covers 16 treatment families, CRM, clinical approval, persistent audit, consent, simulated financing settlement and visit tracking. Earlier two-family statements below describe the initial release only. See docs/COMPLETENESS.md for current implementation and external blockers. No real client deployment or business outcomes are claimed.
+
 # Product charter and business case
 
 Owner: Andrews Mensah. Status: independent prototype; baseline 2026-11-18.

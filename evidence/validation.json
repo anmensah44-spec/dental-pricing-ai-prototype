@@ -1,23 +1,41 @@
 {
-  "executed_utc": "2026-11-18T17:09:50.857755+00:00",
-  "node": "v24.22.3",
-  "python": "Python 3.12.14",
-  "engine_tests": {
-    "passed": 15,
-    "failed": 0,
-    "scenario_sweep_cases": 128
-  },
-  "model_reproduction": "PASS",
-  "markdown_local_links": "PASS",
-  "github_actions": {
-    "run_id": 44359556265,
-    "conclusion": "success",
-    "tested_commit": "6a852a967697a8ec18193162093be4268988e5c4",
-    "url": "https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44359556265",
-    "jobs": [
-      "pricing",
-      "model"
+  "release": "2.0.0",
+  "executed_utc": "2026-11-18T17:55:09.328205+00:00",
+  "node": "24.22.3",
+  "test_report": "test-results-v2.xml",
+  "test_count": 36,
+  "failed": 0,
+  "legacy_sweep_cases": 128,
+  "active_family_sweep_cases": 128,
+  "model_checks": [
+    "check_reproducibility.py: PASS",
+    "check_enterprise.py: PASS"
+  ],
+  "browser": {
+    "method": "manual browser automation through actual UI",
+    "passed": [
+      "coordinator sample sign-in",
+      "create crown plan",
+      "clinician approval",
+      "quote with $100.01 deposit",
+      "estimate consent",
+      "finance consent and submission",
+      "director simulated offer",
+      "patient separate offer consent",
+      "director simulated funding",
+      "zero unpaid balance",
+      "decision JSON download",
+      "refresh preserves records",
+      "audit chain verification"
     ]
   },
-  "production_validation": "NOT_RUN"
+  "github_ci": "PENDING publication of v2",
+  "not_executed": [
+    "Docker build/run",
+    "penetration test",
+    "production load test",
+    "full accessibility audit",
+    "live vendor integration",
+    "production clinical validation"
+  ]
 }

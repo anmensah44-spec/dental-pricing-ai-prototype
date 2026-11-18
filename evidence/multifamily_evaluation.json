@@ -1,0 +1,89 @@
+{
+  "model": "synthetic-multifamily-ridge-2",
+  "data_kind": "synthetic only",
+  "mae_usd": 9.448810409975756,
+  "coverage": 0.9177083333333333,
+  "baseline_mae_usd": 266.5414687108143,
+  "family_metrics": {
+    "EXAM": {
+      "rows": 60,
+      "mae_usd": 8.782078860493385,
+      "coverage": 0.8666666666666667
+    },
+    "CLEAN": {
+      "rows": 60,
+      "mae_usd": 7.700131777665607,
+      "coverage": 0.9666666666666667
+    },
+    "FILL01": {
+      "rows": 60,
+      "mae_usd": 9.176624825987917,
+      "coverage": 0.9166666666666666
+    },
+    "CROWN01": {
+      "rows": 60,
+      "mae_usd": 9.857652493842982,
+      "coverage": 0.9333333333333333
+    },
+    "ROOT": {
+      "rows": 60,
+      "mae_usd": 11.170476188734703,
+      "coverage": 0.8333333333333334
+    },
+    "EXTRACT": {
+      "rows": 60,
+      "mae_usd": 9.307036599569097,
+      "coverage": 0.9166666666666666
+    },
+    "SURGERY": {
+      "rows": 60,
+      "mae_usd": 9.301340689466038,
+      "coverage": 0.8833333333333333
+    },
+    "IMPLANT": {
+      "rows": 60,
+      "mae_usd": 9.478623972778252,
+      "coverage": 0.95
+    },
+    "BRIDGE": {
+      "rows": 60,
+      "mae_usd": 8.681058759012963,
+      "coverage": 0.9333333333333333
+    },
+    "DENTURE": {
+      "rows": 60,
+      "mae_usd": 9.28364566250251,
+      "coverage": 0.9666666666666667
+    },
+    "PERIO": {
+      "rows": 60,
+      "mae_usd": 11.404980993908598,
+      "coverage": 0.8833333333333333
+    },
+    "ORTHO": {
+      "rows": 60,
+      "mae_usd": 9.60356803986638,
+      "coverage": 0.9666666666666667
+    },
+    "WHITEN": {
+      "rows": 60,
+      "mae_usd": 8.976212667982912,
+      "coverage": 0.9166666666666666
+    },
+    "GUARD": {
+      "rows": 60,
+      "mae_usd": 9.46605957795183,
+      "coverage": 0.9
+    },
+    "PEDIATRIC": {
+      "rows": 60,
+      "mae_usd": 9.039528970643639,
+      "coverage": 0.9666666666666667
+    },
+    "EMERGENCY": {
+      "rows": 60,
+      "mae_usd": 9.951946479205274,
+      "coverage": 0.8833333333333333
+    }
+  }
+}
