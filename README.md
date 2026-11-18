@@ -65,7 +65,7 @@ See [validation record](evidence/VALIDATION.md) for executed counts, browser che
 
 ## Repository access and the 404
 
-This repository was created **private**. GitHub returns 404 to signed-out users or accounts without access. Sign in as **anmensah44-spec** to inspect it. Interviewers need explicit collaborator access or a public release. Repository visibility is separate from application hosting; this URL displays source code, not a running web application.
+This repository is **public**, following owner confirmation on 2026-11-18. Interviewers can view and clone the source without collaborator access. The earlier 404 was caused by private visibility. Repository visibility is separate from application hosting; this URL displays source code, not a running web application.
 
 ## Inspect the evidence
 
