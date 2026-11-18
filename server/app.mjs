@@ -172,9 +172,10 @@ export function createApplication(options={}) {
    }
    if(req.method!=='GET'&&req.method!=='HEAD')fail(405,'Method not allowed');
    const relative=path==='/'?'index.html':decodeURIComponent(path.slice(1));
-   if(!['index.html','app.mjs','engine.mjs','styles.css','model.json','cost-model.json'].includes(relative))fail(404,'File not found');
+   if(!['index.html','app.mjs','engine.mjs','styles.css','model.json','cost-model.json','catalog.mjs','pricing.mjs','icons.mjs','studio-adapter.mjs','designer.html','designer.mjs','designer.css','design-screens.json','vendor/grapes.min.js','vendor/grapes.min.css','vendor/GRAPESJS-LICENSE.txt','vendor/version.json'].includes(relative))fail(404,'File not found');
    const file=join(ROOT,'dist',relative);if(!existsSync(file))fail(404,'File not found');
-   res.writeHead(200,{...headers,'Content-Type':({'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'})[extname(file)]});res.end(req.method==='HEAD'?undefined:readFileSync(file));
+   const assetHeaders=relative==='designer.html'?{...headers,'Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; frame-src 'self' blob:; frame-ancestors 'none'; form-action 'self'; base-uri 'self'"}:headers;
+   res.writeHead(200,{...assetHeaders,'Content-Type':({'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.txt':'text/plain; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'})[extname(file)]});res.end(req.method==='HEAD'?undefined:readFileSync(file));
   }catch(e){if(!res.headersSent)json(res,e.status||500,{error:e.status?e.message:'Internal server error'});else res.end();if(!e.status)console.error(e.message);}
  });
  return {server,store,close:async()=>{await new Promise(resolve=>server.close(resolve));db.close();}};

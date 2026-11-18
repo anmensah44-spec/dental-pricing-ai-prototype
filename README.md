@@ -21,6 +21,10 @@ Andrews defined the product vision and requirements, directed the architecture a
 | Governance | Role permissions, version checks, idempotency and persistent audit evidence |
 | Operations | Health checks, database persistence, backup and recovery tooling |
 
+## Visual design studio
+
+Open **Design studio** from any workspace. The embedded GrapesJS editor includes seven screens, editable text and layers, reusable components, style controls, responsive previews, undo/redo, local saves, project JSON import/export and standalone HTML export. Canvas edits are design artifacts; the Live prototype runs the working application workflows. See [design workflow](docs/DESIGN_STUDIO.md).
+
 ## Run the application
 
 Requires Node.js 24+.
@@ -28,6 +32,7 @@ Requires Node.js 24+.
 ```bash
 git clone https://github.com/anmensah44-spec/dental-pricing-ai-prototype.git
 cd dental-pricing-ai-prototype
+npm ci
 npm start
 ```
 
@@ -46,7 +51,7 @@ Open http://127.0.0.1:4173/. Select coordinator, dentist, reviewer, director or 
 
 [Open the walkthrough](demo/WALKTHROUGH.md).
 
-![Clarity Dental application](demo/screenshots/application-v2.jpg)
+![Clarity Dental application](demo/screenshots/application-v3.jpg)
 
 ## Validate the project
 
@@ -58,7 +63,7 @@ pip install -r scripts/requirements.txt
 npm run evidence
 ```
 
-The validation record contains 36 passing checks, pricing matrices, HTTP workflow tests, concurrent-retry checks, model reproduction, browser review and GitHub CI results. See [executed evidence](evidence/VALIDATION.md).
+The validation record contains 42 passing checks, pricing matrices, HTTP workflow tests, concurrent-retry checks, model reproduction, browser review and GitHub CI results. See [executed evidence](evidence/VALIDATION.md).
 
 ## Project documentation
 

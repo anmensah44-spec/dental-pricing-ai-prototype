@@ -1,17 +1,22 @@
 {
   "name": "dental-pricing-ai-prototype",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test --test-concurrency=1 tests/*.test.mjs",
     "start": "node server/start.mjs",
     "evidence": "python3 scripts/train_model.py && python3 scripts/check_reproducibility.py && python3 scripts/train_enterprise.py && python3 scripts/check_enterprise.py",
-    "dev": "node server/start.mjs"
+    "dev": "node server/start.mjs",
+    "vendor": "node scripts/vendor.mjs",
+    "prestart": "node scripts/vendor.mjs"
   },
   "description": "Clarity Dental \u2014 AI pricing and treatment platform created and led by Andrews Mensah",
   "engines": {
     "node": ">=24.0.0"
   },
-  "author": "Andrews Mensah"
+  "author": "Andrews Mensah",
+  "dependencies": {
+    "grapesjs": "0.23.9"
+  }
 }
