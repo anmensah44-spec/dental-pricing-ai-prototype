@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import test from 'node:test';import assert from 'node:assert/strict';import {createApplication} from '../server/app.mjs';
 test('login rate limiter blocks repeated invalid attempts without crashing health checks',async()=>{
  const app=createApplication({dbPath:':memory:'});await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${app.server.address().port}`;

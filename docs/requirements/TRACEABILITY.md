@@ -19,4 +19,6 @@
 | BR15 | Review dispositions preserve blocked route | HTTP review tests |
 | BR16 | Live lender/clinical/vendor systems | Not connected; external blocker matrix |
 
-Source tests define exact scenarios and expected results. This is not a signed client acceptance matrix. Clinical sequences, real benefits/adjudication, multi-organization separation and production operational targets remain outside implemented validation.
+Source tests define exact scenarios and expected results.  Clinical sequences, real benefits/adjudication, multi-organization separation and production operational targets remain outside implemented validation.
+
+Product and architecture direction: **Andrews Mensah**. [Project status](../PROJECT_STATUS.md).

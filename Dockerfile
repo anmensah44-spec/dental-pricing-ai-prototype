@@ -1,3 +1,4 @@
+# Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
 FROM node:24-bookworm-slim
 WORKDIR /app
 COPY --chown=node:node package.json ./

@@ -9,8 +9,9 @@
     "evidence": "python3 scripts/train_model.py && python3 scripts/check_reproducibility.py && python3 scripts/train_enterprise.py && python3 scripts/check_enterprise.py",
     "dev": "node server/start.mjs"
   },
-  "description": "Working synthetic-data dental pricing reference application",
+  "description": "Clarity Dental \u2014 AI pricing and treatment platform created and led by Andrews Mensah",
   "engines": {
     "node": ">=24.0.0"
-  }
+  },
+  "author": "Andrews Mensah"
 }

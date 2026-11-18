@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import http from 'node:http';
 import {readFileSync,existsSync,mkdirSync} from 'node:fs';
 import {dirname,join,resolve,extname} from 'node:path';

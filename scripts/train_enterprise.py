@@ -1,3 +1,5 @@
+# Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+# AI-assisted implementation developed under his direction.
 """Synthetic multi-treatment model; not calibrated for any actual dental practice."""
 from pathlib import Path
 import numpy as np

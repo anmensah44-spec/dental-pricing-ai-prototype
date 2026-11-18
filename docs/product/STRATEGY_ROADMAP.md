@@ -1,19 +1,18 @@
-> Release 2 update: working server-backed synthetic implementation now covers 16 treatment families, CRM, clinical approval, persistent audit, consent, simulated financing settlement and visit tracking. Earlier two-family statements below describe the initial release only. See docs/COMPLETENESS.md for current implementation and external blockers. No real client deployment or business outcomes are claimed.
+# Product strategy and roadmap
 
-# Product strategy and delivery roadmap
+**Strategy, architecture direction and delivery leadership: Andrews Mensah**
 
-The differentiation hypothesis is an explainable pricing journey combining learned cost estimation with enforceable policy and traceable exception handling. The prototype demonstrates feasibility on synthetic cases; it does not validate demand or clinical performance.
+The strategy combines learned treatment-cost estimation with explicit pricing constraints, exact financial arithmetic and a connected patient journey. Andrews prioritized an integrated workflow spanning clinical authority, pricing, CRM, consent, financing and financial operations.
 
-| Stage | Deliverable | Exit evidence | Accountable role |
-|---|---|---|---|
-| 0: portfolio | Two-family executable demo and evidence | Passing local tests, walkthrough, honest scope | Product owner / tech lead |
-| 1: discovery | Signed workflows, contract inventory, baseline KPIs | Clinical/finance approvals and data rights | BA / business owners |
-| 2: foundation | Authenticated services, versioned policy, adapter contracts | Integration, security and recovery tests | Architect / engineering |
-| 3: model validation | Representative labeled costs; temporal/site holdouts | Approved error, calibration, subgroup and drift thresholds | Data science / model risk |
-| 4: shadow pilot | Compare without affecting live estimates | Independent reconciliation and incident exercises | Clinical / finance / operations |
-| 5: bounded rollout | Controlled offices, feature flags, manual fallback | Signed pilot scorecard and rollback rehearsal | Product director / release owner |
-| 6: expansion | More treatments, CRM and partner workflows | Separate approval for each use and geography | Executive steering group |
+| Delivery area | Current capability | Expansion focus |
+|---|---|---|
+| Experience | CRM, clinical, pricing, financing and audit workspaces | User research and accessibility validation |
+| AI | 16-family trained model, uncertainty and reproducible evaluation | Authorized practice data and site/time validation |
+| Pricing | Fee movement, margin, contract and discount controls | Governed real contract feeds and policy publication |
+| Patient journey | Acceptance, separate consents and visit tracking | Partner-specific channels and communication |
+| Operations | Persistence, roles, idempotency, audit and recovery | Organization identity, scale and operational rollout |
+| Integrations | Local adapters and sandbox financing | Authorized EHR, payer, CRM and lender connections |
 
-No delivery dates or budgets are committed without staffing and discovery. Prioritize safety and reconciliation before conversion optimization. Do not optimize individual prices using protected traits, credit vulnerability or inferred willingness to pay. Treatment recommendation remains clinician-led.
+Measure estimate handling time, rework, exception rates, reconciliation accuracy, model error/coverage and patient comprehension. Release decisions consider both business value and control performance. Clinical and financial policy owners validate their domains before operational expansion.
 
-Success measures need owners, numerator/denominator, source, frequency, exclusions and baseline. Include estimate latency, override/rework rate, unsupported-case rate, reconciliation errors, model error by family/site and complaints. Pause automation for unexplained reconciliation differences, stale contract data or unsafe error rates; thresholds must be agreed before a real pilot.
+See [Project status](../PROJECT_STATUS.md) for the current environment and [validation evidence](../../evidence/VALIDATION.md) for executed checks.

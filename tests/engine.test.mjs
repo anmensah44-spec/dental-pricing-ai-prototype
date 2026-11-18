@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {price,predict,rate,financeState} from '../dist/engine.mjs';
 const model=JSON.parse(readFileSync(new URL('../dist/model.json',import.meta.url)));const input={family:'CROWN01',minutes:75,lab:280,deposit:0,approved:true,stale:false,insurance:false,loyalty:false,financing:false};
 test('basis point arithmetic rounds ties half up in cents',()=>{assert.equal(rate(101,5000),51);assert.equal(rate(470000,300),14100);});

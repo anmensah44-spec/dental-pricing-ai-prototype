@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import {rate} from '../dist/engine.mjs';
 import {CATALOG,POLICY} from './catalog.mjs';
 export function decimalCents(value) {

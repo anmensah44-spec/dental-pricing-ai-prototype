@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import {price,money,rate,POLICY,financeState} from './engine.mjs';
 const model=await fetch('./model.json').then(r=>{if(!r.ok)throw Error('Model could not load');return r.json()});
 const app=document.querySelector('#app');const KEY='clarity-dental-demo-v1';let records=[],selected=null;

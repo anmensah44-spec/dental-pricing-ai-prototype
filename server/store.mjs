@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import {DatabaseSync} from 'node:sqlite';
 import {createHash,randomBytes,scryptSync,timingSafeEqual} from 'node:crypto';
 export const hash=x=>createHash('sha256').update(x).digest('hex');

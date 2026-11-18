@@ -1,3 +1,4 @@
+# Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
 name: Application validation
 on: [push, pull_request, workflow_dispatch]
 permissions:

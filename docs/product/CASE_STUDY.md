@@ -1,25 +1,23 @@
-> Release 2 update: working server-backed synthetic implementation now covers 16 treatment families, CRM, clinical approval, persistent audit, consent, simulated financing settlement and visit tracking. Earlier two-family statements below describe the initial release only. See docs/COMPLETENESS.md for current implementation and external blockers. No real client deployment or business outcomes are claimed.
+# Product leadership case study — Clarity Dental
 
-# Leadership case study: Clarity Dental Pricing AI
+**Andrews Mensah · AI Product Director · Product Owner · Architecture and Delivery Lead**
 
-## Challenge
+## Product challenge
 
-Design a credible dental pricing platform connecting clinical approval, estimated costs, financial controls, patient communication and financing. The product discussion referenced Aspen Dental and potential Synchrony/Zest AI involvement; no relationship or integration was verified or implemented.
+Bring clinical treatment planning, AI-driven cost estimation, controlled pricing, patient acceptance, CRM and financing together in one coherent platform.
 
-## Product decisions
+## Andrews’s leadership
 
-The owner prioritized AI at the center of pricing. The implementation translates that intent into a trained cost model feeding constrained optimization, with integer financial calculations and explicit review routes. This makes learned uncertainty visible without delegating exact money arithmetic or clinical authority to a language model.
+Andrews originated the product vision and scope, defined the treatment and patient journeys, required CRM and financing integration in the design, and directed architectural and delivery decisions. He challenged incomplete documentation and scope gaps, set priorities, reviewed successive implementations and directed the move from a browser-only release to an integrated server-backed application.
 
-The first release narrows broad enterprise ambitions to two fictional families so that actual working behavior can be inspected. The financing journey is a simulator because real lender decision authority, contracts, API access and underwriting prerequisites are absent.
+## Decisions translated into implementation
 
-## Evidence produced
+The application uses learned cost estimation with constrained optimization and exact financial arithmetic. Clinical approval remains a separate role-controlled workflow. Estimates carry model and policy references; separate consents distinguish treatment acceptance, application submission and offer acceptance. Transactions, version checks and idempotency protect the workflow. A persistent audit and a reconciled ledger connect the journey from plan to completion.
 
-Runnable application, model training script, held-out synthetic evaluation, control tests, architecture and requirements mapping. Evaluation and validation files carry executed results. GitHub workflow configuration is provided but is not proof that CI has run.
+## Delivered evidence
 
-## Outcomes and limits
+Working application; 16-family model and reproducible training pipeline; CRM and clinical workflows; pricing and finance lifecycle; role permissions and patient scoping; audit and backup tooling; product, requirements and architecture documentation; 36 passing tests and successful GitHub CI on the functional release. AI-assisted engineering tools supported implementation under Andrews’s direction.
 
-A functional synthetic prototype and a documented enterprise implementation path exist. No production deployment, patient benefit, revenue lift, cost saving, fair-lending validation or operational adoption is claimed. The next business milestone is discovery and an approved shadow-pilot plan with representative data and accountable clinical/finance owners.
+## Evaluation and next decisions
 
-## Interview discussion
-
-Explain why scope was reduced, how price caps constrain the optimizer, how uncertainty changes margin feasibility, why bank underwriting stays with the lender, and what evidence would justify a production pilot. See CONTRIBUTIONS.md for AI assistance and ownership boundaries.
+The evidence demonstrates integrated application behavior and technical controls. Practice-level benefits will be measured through an approved operational rollout. [Project status](../PROJECT_STATUS.md) records current data provenance, partner connections and validation stages.

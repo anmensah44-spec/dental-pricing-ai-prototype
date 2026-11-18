@@ -1,3 +1,7 @@
+/*
+Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
+AI-assisted implementation developed under his direction.
+*/
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtempSync,rmSync,readFileSync} from 'node:fs';

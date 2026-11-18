@@ -13,3 +13,5 @@
 - [Walkthrough](../demo/WALKTHROUGH.md)
 
 The current implementation is documented in architecture/SOLUTION.md. See [completion matrix](COMPLETENESS.md) and [operations](OPERATIONS.md) for runtime scope and recovery.
+
+Product and architecture direction: **Andrews Mensah**. [Project status](PROJECT_STATUS.md).

@@ -1,9 +1,9 @@
-# Product leadership and contributions
+# Andrews Mensah — Product Leadership and Ownership
 
-## Andrews Mensah — Product Owner and AI Product Lead
+**AI Product Director · Product Owner · Architecture and Delivery Lead**
 
-Andrews defined the product vision, scope, requirements and delivery priorities for Clarity Dental, covering treatment journeys, AI-driven pricing, CRM and financing workflows. He directed iterative reviews of the architecture, documentation and working application.
+Andrews Mensah created and led Clarity Dental. He defined the product vision, scope, treatment journeys, pricing and financing requirements, CRM capabilities, architectural direction, delivery priorities and acceptance expectations. He directed the iterative design, implementation, testing and refinement of the platform.
 
-Development used AI-assisted engineering, documentation and testing, including assistance from ChatGPT/Codex. Evaluation uses generated test data; it does not establish performance on actual patient or practice data.
+The repository brings together his product strategy, requirements, architectural decisions and delivery direction with the resulting application, models, tests and documentation. AI-assisted engineering tools supported development under his direction.
 
-Clarity Dental is an independent reference application. Live clinical and lender integrations, production adoption and measured business outcomes have not been established. Aspen Dental, Synchrony and Zest AI were reference organizations in the design discussion; no commissioned engagement, affiliation or vendor authorization is claimed.
+See [Project status](docs/PROJECT_STATUS.md) for the current operating environment and integration details.
