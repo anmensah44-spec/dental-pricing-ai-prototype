@@ -1,0 +1,24 @@
+{
+  "version": "synthetic-ridge-1",
+  "features": [
+    "intercept",
+    "crown",
+    "chair_minutes",
+    "lab_cost_usd"
+  ],
+  "coefficients": [
+    29.02239663324524,
+    97.07309823202777,
+    2.796296581975923,
+    1.0715890270319157
+  ],
+  "interval_radius_usd": 30.155504337024155,
+  "training_rows": 900,
+  "calibration_rows": 250,
+  "test_rows": 250,
+  "mae_usd": 14.27947054003659,
+  "wape": 0.03265812227914615,
+  "interval_coverage": 0.892,
+  "seed": 42,
+  "data": "Generated synthetic data only; no clinical validation or real-world accuracy claim."
+}

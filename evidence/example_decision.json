@@ -1,0 +1,39 @@
+{
+  "data_kind": "synthetic",
+  "input": {
+    "family": "CROWN01",
+    "minutes": 75,
+    "lab": 280,
+    "deposit": 10000,
+    "approved": true,
+    "stale": false,
+    "insurance": true,
+    "loyalty": true,
+    "financing": true
+  },
+  "decision": {
+    "route": "ISSUED",
+    "gross": 180000,
+    "discount": 0,
+    "net": 180000,
+    "fee": 3600,
+    "score": [
+      0,
+      0,
+      180000
+    ],
+    "cost": {
+      "mean": 63586,
+      "upper": 66602,
+      "lower": 60570
+    },
+    "payer": 50000,
+    "patient": 130000,
+    "deposit": 10000,
+    "balance": 120000,
+    "reference": 180000,
+    "contribution": 112814,
+    "policy": "DEMO-P1",
+    "model": "synthetic-ridge-1"
+  }
+}

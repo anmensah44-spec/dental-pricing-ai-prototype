@@ -1,0 +1,8 @@
+{
+  "dataset": "synthetic_costs.csv",
+  "sha256": "2ce618be50b813e897dcc0eb051f3a464c7cc1fce9aece5fa504d40ca93b1ca4",
+  "generator": "scripts/train_model.py",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "patient_data": false
+}

@@ -1,0 +1,36 @@
+{
+  "model": "synthetic-ridge-1",
+  "data_kind": "synthetic only",
+  "seed": 42,
+  "split": {
+    "train": 900,
+    "calibration": 250,
+    "test": 250
+  },
+  "ridge": {
+    "rows": 250,
+    "mae_usd": 14.27947054003659,
+    "wape": 0.03265812227914615
+  },
+  "training_mean_baseline": {
+    "rows": 250,
+    "mae_usd": 209.99870541915652,
+    "wape": 0.4802813508254649
+  },
+  "interval_coverage": 0.892,
+  "interval_radius_usd": 30.155504337024155,
+  "families": {
+    "FILL01": {
+      "rows": 117,
+      "mae_usd": 13.047487459593038,
+      "wape": 0.061060037246664006,
+      "interval_coverage": 0.9230769230769231
+    },
+    "CROWN01": {
+      "rows": 133,
+      "mae_usd": 15.363245129599713,
+      "wape": 0.024235883311658678,
+      "interval_coverage": 0.8646616541353384
+    }
+  }
+}

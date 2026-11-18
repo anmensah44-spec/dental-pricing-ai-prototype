@@ -1,0 +1,12 @@
+{
+  "name": "dental-pricing-ai-prototype",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "start": "python3 -m http.server 4173 --directory dist",
+    "evidence": "python3 scripts/train_model.py && python3 scripts/check_reproducibility.py"
+  },
+  "description": "Independent synthetic-data dental pricing portfolio prototype"
+}
