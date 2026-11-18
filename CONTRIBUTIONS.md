@@ -1,9 +1,9 @@
-# Contribution and authorship statement
+# Product leadership and contributions
 
-Andrews Mensah is the portfolio owner and product sponsor. In the recorded design discussion, he defined the dental pricing, treatment journey, CRM, financing and AI emphasis; challenged scope and documentation completeness; and directed the creation of this demonstration.
+## Andrews Mensah — Product Owner and AI Product Lead
 
-ChatGPT/Codex assisted with solution design, code generation, synthetic data generation, documentation, tests and packaging. Repository contents do not establish that Andrews personally wrote every line of code. Technical review and explanation of the code should form part of interview preparation.
+Andrews defined the product vision, scope, requirements and delivery priorities for Clarity Dental, covering treatment journeys, AI-driven pricing, CRM and financing workflows. He directed iterative reviews of the architecture, documentation and working application.
 
-This is an independent prototype, not evidence of employment, a commissioned Aspen Dental project, vendor authorization, actual patient outcomes, production adoption, realized savings or completed clinical/compliance approval. Proposed roles and approval gates are design artifacts, not signed approvals.
+Development used AI-assisted engineering, documentation and testing, including assistance from ChatGPT/Codex. Evaluation uses generated test data; it does not establish performance on actual patient or practice data.
 
-Dates and execution evidence reflect the actual creation/verification period. No artificial historical commits or backdated delivery claims are used.
+Clarity Dental is an independent reference application. Live clinical and lender integrations, production adoption and measured business outcomes have not been established. Aspen Dental, Synchrony and Zest AI were reference organizations in the design discussion; no commissioned engagement, affiliation or vendor authorization is claimed.
