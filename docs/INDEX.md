@@ -1,5 +1,6 @@
 # Documentation index
 
+- [Role-based UX design review](UX_DESIGN_REVIEW.md)
 - [Final repository review](FINAL_REVIEW.md)
 
 - [Charter and business case](product/CHARTER.md)
@@ -10,6 +11,7 @@
 - [Future API contracts](architecture/API_DESIGN.md)
 - [Model and data card](governance/MODEL_CARD.md)
 - [Governance and vendor readiness](governance/READINESS.md)
+- [Role UX validation](../evidence/ROLE_UX_VALIDATION.md)
 - [Visual design studio](DESIGN_STUDIO.md)
 - [Validation](../evidence/VALIDATION.md)
 - [Contribution statement](../CONTRIBUTIONS.md)

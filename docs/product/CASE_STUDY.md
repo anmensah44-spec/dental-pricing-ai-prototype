@@ -14,9 +14,13 @@ Andrews originated the product vision and scope, defined the treatment and patie
 
 The application uses learned cost estimation with constrained optimization and exact financial arithmetic. Clinical approval remains a separate role-controlled workflow. Estimates carry model and policy references; separate consents distinguish treatment acceptance, application submission and offer acceptance. Transactions, version checks and idempotency protect the workflow. A persistent audit and a reconciled ledger connect the journey from plan to completion.
 
+## User experience direction
+
+Andrews directed the role-based information architecture and interaction design for executive oversight, nursing and coordination, clinical review, pricing exceptions and patient choice. The resulting workspaces provide prioritized tasks, focused record views, named approval owners and editable design canvases.
+
 ## Delivered evidence
 
-Working application; 16-family model and reproducible training pipeline; CRM and clinical workflows; pricing and finance lifecycle; role permissions and patient scoping; audit and backup tooling; product, requirements and architecture documentation; 42 passing tests and successful GitHub CI on the functional release.
+Working application; 16-family model and reproducible training pipeline; CRM and clinical workflows; pricing and finance lifecycle; role permissions and patient scoping; audit and backup tooling; product, requirements and architecture documentation; 46 passing tests and successful GitHub CI on the functional release.
 
 ## Validation and next decisions
 

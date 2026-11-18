@@ -11,7 +11,7 @@ Official references: https://github.com/GrapesJS/grapesjs | https://grapesjs.com
 ## Design workflow
 
 1. Open the live application and choose a screen. Select Design studio to carry that screen into the editor.
-2. Switch among seven screen layouts with the Screen selector. Double-click text to edit, select elements to style, or use Layers and Components.
+2. Switch among core and role-specific screen layouts with the Screen selector. Double-click text to edit, select elements to style, or use Layers and Components.
 3. Preview Desktop, Tablet and Mobile layouts. Use Undo and Redo while iterating.
 4. Save layout retains the design on the current browser/device. Export project JSON keeps an editable GrapesJS project; import it to continue on another device.
 5. Export screen HTML creates a standalone layout with embedded CSS. It represents the visual layout; application API workflows remain in the live app.

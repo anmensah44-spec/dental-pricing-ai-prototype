@@ -10,6 +10,10 @@ Andrews defined the product vision and requirements, directed the architecture a
 
 [Open the live workspace](https://dental-pricing-ai-andrews.z7rqc6vtfq.chatgpt.site/) · [Design studio guide](docs/DESIGN_STUDIO.md) · [Validation evidence](evidence/VALIDATION.md)
 
+## Role-based experience
+
+Executives, nursing/coordinators, clinicians, pricing reviewers and patients have focused landing pages, worklists and navigation. The Approval center names the owner of each clinical, pricing and patient decision. See the [UX design review](docs/UX_DESIGN_REVIEW.md).
+
 ## Platform capabilities
 
 | Workspace | Capabilities |
@@ -25,7 +29,7 @@ Andrews defined the product vision and requirements, directed the architecture a
 
 ## Visual design studio
 
-Open **Design studio** from any workspace. The embedded GrapesJS editor includes seven screens, editable text and layers, reusable components, style controls, responsive previews, undo/redo, local saves, project JSON import/export and standalone HTML export. Canvas edits are design artifacts; the Live prototype runs the working application workflows. See [design workflow](docs/DESIGN_STUDIO.md).
+Open **Design studio** from any workspace. The embedded GrapesJS editor includes role-specific screens, editable text and layers, reusable components, style controls, responsive previews, undo/redo, local saves, project JSON import/export and standalone HTML export. Canvas edits are design artifacts; the Live prototype runs the working application workflows. See [design workflow](docs/DESIGN_STUDIO.md).
 
 ## Run the application
 
@@ -65,7 +69,7 @@ pip install -r scripts/requirements.txt
 npm run evidence
 ```
 
-The validation record contains 42 passing checks, pricing matrices, HTTP workflow tests, concurrent-retry checks, model reproduction, browser review and GitHub CI results. See [executed evidence](evidence/VALIDATION.md).
+The validation record contains 46 passing checks, pricing matrices, HTTP workflow tests, concurrent-retry checks, model reproduction, browser review and GitHub CI results. See [executed evidence](evidence/VALIDATION.md).
 
 ## Project documentation
 

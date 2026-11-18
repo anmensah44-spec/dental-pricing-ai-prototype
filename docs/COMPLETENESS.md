@@ -17,7 +17,7 @@ Reviewed 2026-11-18. Definition of done for this release: a runnable evaluation 
 | No operational package | Health, backup, graceful shutdown, runbook, Docker source | Docker not executed; no hosted Node environment provisioned |
 | Incomplete testing | Engine, HTTP integration, negative paths, model reproduction, browser journey | No exhaustive security, accessibility or production load certification |
 | 404 repository link | Public GitHub repository verified; main-branch CI passed | Hosted Site uses its existing owner sign-in |
-| Editable visual design | Embedded GrapesJS; seven screen layouts, styles, responsive previews and exports | Saved canvas designs are separate from application workflow execution |
+| Editable visual design | Embedded GrapesJS; 13 core and role-specific screen layouts, styles, responsive previews and exports | Saved canvas designs are separate from application workflow execution |
 
 ## External prerequisites
 
