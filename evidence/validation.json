@@ -9,6 +9,15 @@
   },
   "model_reproduction": "PASS",
   "markdown_local_links": "PASS",
-  "github_actions": "Run #1: pricing passed; model checksum failed after CSV newline normalization in upload. Fixed generator to use LF; rerun pending.",
+  "github_actions": {
+    "run_id": 44359556265,
+    "conclusion": "success",
+    "tested_commit": "6a852a967697a8ec18193162093be4268988e5c4",
+    "url": "https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44359556265",
+    "jobs": [
+      "pricing",
+      "model"
+    ]
+  },
   "production_validation": "NOT_RUN"
 }
