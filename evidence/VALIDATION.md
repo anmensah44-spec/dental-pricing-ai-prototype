@@ -1,4 +1,12 @@
-# Release 2 validation
+# Release 3 validation
+
+Reviewed 18 November 2026. The current application suite passes **42 tests with zero failures**. Both model reproduction checks pass. Browser review verified the treatment-plan modal, patient drawer/search, pricing with an exact $50.01 deposit, model evidence, separate offer consent, sandbox funding, editable screen text, layout saves, mobile preview and JSON export.
+
+The redesigned application and visual editor were published as Site version 4. GitHub [release 3 CI](https://github.com/anmensah44-spec/dental-pricing-ai-prototype/actions/runs/44373339188) passed for commit `c4a7c62d1abbd834c2bbb03fd846380f83e864bf`. The final presentation cleanup is validated separately in the final-review record.
+
+See [redesign validation](REDESIGN_VALIDATION.md), [application screenshot](../demo/screenshots/application-v3.jpg) and [editor screenshot](../demo/screenshots/design-studio-v3.jpg).
+
+## Archived release 2 validation
 
 Executed 2026-11-18 on Node 24.22.3. Full machine-readable test output: test-results-v2.xml; record: validation.json.
 

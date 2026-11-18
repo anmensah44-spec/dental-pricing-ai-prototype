@@ -1,5 +1,4 @@
 # Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-# AI-assisted implementation developed under his direction.
 """Reproducible ridge baseline trained ONLY on generated, synthetic dental cost data."""
 from pathlib import Path
 import json

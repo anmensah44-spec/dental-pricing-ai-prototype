@@ -2,9 +2,9 @@
 
 ## Local operation
 
-Install Node 24+, clone the repository and run npm start. No npm dependencies are required. Stop with Ctrl+C. Configuration can be supplied in process environment or a local ignored .env copied from .env.example. Database initialization creates five shared evaluation accounts. DEMO_PASSWORD applies only to initial account creation; changing it later does not rotate stored passwords. Production identity administration is not implemented.
+Install Node 24+, clone the repository and run `npm ci`, then `npm start`. GrapesJS 0.23.9 is the pinned visual-editor dependency; the prestart step packages its browser assets. Stop with Ctrl+C. Configuration can be supplied in process environment or a local ignored .env copied from .env.example. Database initialization creates five shared evaluation accounts. DEMO_PASSWORD applies only to initial account creation; changing it later does not rotate stored passwords. Production identity administration is not implemented.
 
-Default listen address is 127.0.0.1:4173. Keep evaluation evaluation private. HTTPS reverse proxies need PUBLIC_ORIGIN and COOKIE_SECURE=true. An upstream access gate is required for hosted evaluation with shared demonstration identities. APP_MODE accepts only evaluation mode; changing a flag does not authorize real patient use.
+Default listen address is 127.0.0.1:4173. Keep shared evaluation accounts behind an access gate. HTTPS reverse proxies need PUBLIC_ORIGIN and COOKIE_SECURE=true. An upstream access gate is required for hosted evaluation with shared demonstration identities. APP_MODE accepts only evaluation mode; changing a flag does not authorize real patient use.
 
 GET /healthz reports database access and audit verification. On database/audit errors stop changes, preserve the database, inspect the last valid backup and rerun application tests. Do not repair evidence by deleting audit rows.
 
@@ -24,6 +24,6 @@ For restore, stop the server; keep the current database and its WAL/SHM files to
 
 Dockerfile and compose.yaml bind the application to localhost and persist a named data volume. Run `docker compose up --build` in an environment with Docker. The container path is not executed in this workspace, and no successful container deployment is claimed.
 
-No externally hosted Node service has been provisioned by this release. GitHub source publication does not host the application. The earlier private static Site remains an older version and cannot run this Node backend unchanged.
+No externally hosted Node service has been provisioned by this release. GitHub source publication does not host the application. The current private Site serves the redesigned browser studio and GrapesJS design editor. It uses device-local records and the shared pricing module; the Node backend uses authenticated SQLite records.
 
 Product and architecture direction: **Andrews Mensah**. [Project status](PROJECT_STATUS.md).

@@ -16,8 +16,8 @@ The application uses learned cost estimation with constrained optimization and e
 
 ## Delivered evidence
 
-Working application; 16-family model and reproducible training pipeline; CRM and clinical workflows; pricing and finance lifecycle; role permissions and patient scoping; audit and backup tooling; product, requirements and architecture documentation; 36 passing tests and successful GitHub CI on the functional release. AI-assisted engineering tools supported implementation under Andrews’s direction.
+Working application; 16-family model and reproducible training pipeline; CRM and clinical workflows; pricing and finance lifecycle; role permissions and patient scoping; audit and backup tooling; product, requirements and architecture documentation; 42 passing tests and successful GitHub CI on the functional release.
 
-## Evaluation and next decisions
+## Validation and next decisions
 
 The evidence demonstrates integrated application behavior and technical controls. Practice-level benefits will be measured through an approved operational rollout. [Project status](../PROJECT_STATUS.md) records current data provenance, partner connections and validation stages.

@@ -1,6 +1,5 @@
 /*
 Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-AI-assisted implementation developed under his direction.
 */
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {DatabaseSync} from 'node:sqlite';import {backup} from '../scripts/backup.mjs';
 test('online SQLite backup can restore records and refuses overwrite',()=>{const dir=mkdtempSync(join(tmpdir(),'clarity-backup-'));try{const src=join(dir,'a.sqlite'),dest=join(dir,'b.sqlite');const db=new DatabaseSync(src);db.exec("PRAGMA journal_mode=WAL;CREATE TABLE sample(id INTEGER);INSERT INTO sample VALUES(7)");backup(src,dest);const restored=new DatabaseSync(dest);assert.equal(restored.prepare('SELECT id FROM sample').get().id,7);restored.close();assert.throws(()=>backup(src,dest),/destination/);db.close();}finally{rmSync(dir,{recursive:true,force:true});}});

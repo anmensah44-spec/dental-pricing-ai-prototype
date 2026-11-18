@@ -1,6 +1,5 @@
 /*
 Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-AI-assisted implementation developed under his direction.
 */
 // Fictional treatment and financial references. Not clinical protocols or actual fees.
 export const CATALOG = Object.freeze([

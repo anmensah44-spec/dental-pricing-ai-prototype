@@ -1,6 +1,5 @@
 /*
 Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-AI-assisted implementation developed under his direction.
 */
 import {DatabaseSync} from 'node:sqlite';
 import {existsSync,chmodSync} from 'node:fs';

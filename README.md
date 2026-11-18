@@ -8,6 +8,8 @@ Clarity Dental brings treatment planning, AI-driven pricing, CRM, patient consen
 
 Andrews defined the product vision and requirements, directed the architecture and implementation decisions, established delivery priorities, and led iterative reviews of the application, models, tests and documentation. See [leadership and contributions](CONTRIBUTIONS.md).
 
+[Open the live workspace](https://dental-pricing-ai-andrews.z7rqc6vtfq.chatgpt.site/) · [Design studio guide](docs/DESIGN_STUDIO.md) · [Validation evidence](evidence/VALIDATION.md)
+
 ## Platform capabilities
 
 | Workspace | Capabilities |
@@ -67,6 +69,8 @@ The validation record contains 42 passing checks, pricing matrices, HTTP workflo
 
 ## Project documentation
 
+[Final repository review](docs/FINAL_REVIEW.md) records the completed checks and delivery status.
+
 - [Product charter and business case](docs/product/CHARTER.md)
 - [Strategy and roadmap](docs/product/STRATEGY_ROADMAP.md)
 - [Leadership case study](docs/product/CASE_STUDY.md)
@@ -77,4 +81,4 @@ The validation record contains 42 passing checks, pricing matrices, HTTP workflo
 - [Operations and recovery](docs/OPERATIONS.md)
 - [Project status, data provenance and integration environment](docs/PROJECT_STATUS.md)
 
-The repository is public and can be shared with recruiters and technical reviewers. GitHub hosts the source; the application runs on its Node backend. The Project status page records the evaluation-data setup, sandbox connections and external integration requirements in one place.
+The repository is public and can be shared with recruiters and technical reviewers. GitHub hosts the source. The Node application uses authenticated SQLite records; the hosted browser studio provides the redesigned interactive walkthrough and editable design canvas. The Project status page records the evaluation-data setup, sandbox connections and external integration requirements in one place.

@@ -1,4 +1,4 @@
-# Completion matrix — release 2.0.0
+# Completion matrix — release 3.0.0
 
 Reviewed 2026-11-18. Definition of done for this release: a runnable evaluation reference application with durable records, role-separated workflows, ML inference, exact pricing, simulated finance lifecycle, documented operation and executed tests. Integration and deployment stages are recorded in [Project status](PROJECT_STATUS.md).
 
@@ -16,7 +16,8 @@ Reviewed 2026-11-18. Definition of done for this release: a runnable evaluation 
 | No financial reconciliation | Deposit/payments/funding/refund ledger invariants | No payment processor or bank settlement |
 | No operational package | Health, backup, graceful shutdown, runbook, Docker source | Docker not executed; no hosted Node environment provisioned |
 | Incomplete testing | Engine, HTTP integration, negative paths, model reproduction, browser journey | No exhaustive security, accessibility or production load certification |
-| 404 repository link | Verified private repository and owner identity | Public/collaborator access requires visibility/access decision |
+| 404 repository link | Public GitHub repository verified; main-branch CI passed | Hosted Site uses its existing owner sign-in |
+| Editable visual design | Embedded GrapesJS; seven screen layouts, styles, responsive previews and exports | Saved canvas designs are separate from application workflow execution |
 
 ## External prerequisites
 

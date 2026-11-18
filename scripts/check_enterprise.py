@@ -1,5 +1,4 @@
 # Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-# AI-assisted implementation developed under his direction.
 """Independent reproduction from the archived multifamily CSV."""
 from pathlib import Path
 import csv,json,hashlib

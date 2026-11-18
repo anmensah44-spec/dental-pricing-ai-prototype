@@ -1,6 +1,5 @@
 /*
 Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah.
-AI-assisted implementation developed under his direction.
 */
 export const POLICY=Object.freeze({version:'DEMO-P1',marginBps:3000,movementBps:500,merchantBps:300,quoteDays:14});
 export const money=c=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(c/100);

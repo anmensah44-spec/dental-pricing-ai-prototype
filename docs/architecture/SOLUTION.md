@@ -1,4 +1,4 @@
-# Implemented solution architecture — release 2
+# Implemented solution architecture — release 3
 
 ```mermaid
 flowchart TD
@@ -16,7 +16,7 @@ flowchart TD
  T[Evaluation Python training] --> M
 ```
 
-The backend serves the UI and API from one origin. No CORS access is enabled. Passwords are scrypt-hashed; random session tokens are stored hashed in SQLite with an 8-hour lifetime. CSRF tokens and origin checks protect authenticated writes. Patient queries are scoped to their assigned evaluation patient ID.
+The backend serves the UI and API from one origin. The hosted browser studio uses a local-storage adapter with the same `dist/pricing.mjs` estimator and treatment catalog. The embedded GrapesJS editor works with screen snapshots and exported layouts; canvas edits do not modify API behavior. Backend role, session and database protections apply to the Node application, while studio perspectives support walkthroughs. No CORS access is enabled. Passwords are scrypt-hashed; random session tokens are stored hashed in SQLite with an 8-hour lifetime. CSRF tokens and origin checks protect authenticated writes. Patient queries are scoped to their assigned evaluation patient ID.
 
 Every command runs in a transaction with an actor-scoped idempotency key and payload hash. Reusing a key with a different command yields 409. Entity versions reject stale actions. Clinical plan approval is restricted to clinician; admin cannot approve. Issued prices remain fixed through acceptance and financing; only one estimate can be accepted per plan. Financing funds cannot exceed unpaid balance. Active financing must be withdrawn/refunded before plan cancellation.
 
