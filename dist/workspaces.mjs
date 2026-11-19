@@ -1,12 +1,12 @@
 /* Product vision, requirements, architecture direction and delivery leadership: Andrews Mensah. */
 export const WORKSPACES={
- coordinator:{name:'Nursing & coordination',short:'Care team',title:'A clear next step for every patient.',description:'Prepare the patient, coordinate care and keep the journey moving.',focus:'Your patient worklist',icon:'users',pages:['overview','crm','plans','approvals','quotes','finance','status']},
- clinician:{name:'Dentist / clinician',short:'Clinical workspace',title:'Clinical decisions, with the context you need.',description:'Review treatment plans, approve appropriate care and complete due visits.',focus:'Your clinical worklist',icon:'tooth',pages:['overview','crm','plans','approvals','quotes','evidence','status']},
- reviewer:{name:'Pricing & risk reviewer',short:'Review workspace',title:'Every exception deserves a clear decision.',description:'Inspect the evidence and route pricing exceptions to the right owner.',focus:'Your review worklist',icon:'shield',pages:['overview','approvals','quotes','evidence','status']},
- admin:{name:'Executive / director',short:'Executive workspace',title:'The whole journey. A clear line of sight.',description:'See delivery readiness, approval ownership and unresolved decisions in one place.',focus:'Leadership attention',icon:'grid',pages:['overview','approvals','crm','plans','quotes','finance','evidence','status']},
- patient:{name:'Patient',short:'My care',title:'Your care. Your choices. Clearly explained.',description:'See your treatment plan, understand your estimate and choose your next step.',focus:'Your next steps',icon:'tooth',pages:['overview','plans','quotes','finance','status']}
+ coordinator:{name:'Nursing & coordination',short:'Care team',title:'A clear next step for every patient.',description:'Prepare the patient, coordinate care and keep the journey moving.',focus:'Your patient worklist',icon:'users',pages:['overview','crm','plans','approvals','insurance','quotes','finance','status']},
+ clinician:{name:'Dentist / clinician',short:'Clinical workspace',title:'Clinical decisions, with the context you need.',description:'Review treatment plans, approve appropriate care and complete due visits.',focus:'Your clinical worklist',icon:'tooth',pages:['overview','crm','plans','approvals','insurance','quotes','evidence','status']},
+ reviewer:{name:'Pricing & risk reviewer',short:'Review workspace',title:'Every exception deserves a clear decision.',description:'Inspect the evidence and route pricing exceptions to the right owner.',focus:'Your review worklist',icon:'shield',pages:['overview','approvals','insurance','quotes','evidence','status']},
+ admin:{name:'Executive / director',short:'Executive workspace',title:'The whole journey. A clear line of sight.',description:'See delivery readiness, approval ownership and unresolved decisions in one place.',focus:'Leadership attention',icon:'grid',pages:['overview','approvals','crm','plans','insurance','quotes','finance','evidence','status']},
+ patient:{name:'Patient',short:'My care',title:'Your care. Your choices. Clearly explained.',description:'See your treatment plan, understand your estimate and choose your next step.',focus:'Your next steps',icon:'tooth',pages:['overview','plans','insurance','quotes','finance','status']}
 };
-export const PAGE_LABELS={overview:'My workspace',crm:'Patient records',plans:'Treatment plans',approvals:'Approval center',quotes:'Pricing & estimates',finance:'Financing',evidence:'AI & governance',status:'Project details'};
+export const PAGE_LABELS={overview:'My workspace',crm:'Patient records',plans:'Treatment plans',approvals:'Approval center',insurance:'Insurance & benefits',quotes:'Pricing & estimates',finance:'Financing',evidence:'AI & governance',status:'Project details'};
 export const workspaceFor=role=>WORKSPACES[role]||WORKSPACES.coordinator;
 export function summarize(w,now=Date.now()){
  const activePlans=w.plans.filter(p=>!['CANCELLED','COMPLETED'].includes(p.status));
@@ -16,6 +16,9 @@ export function summarize(w,now=Date.now()){
 export function worklist(w,role,now=Date.now()){
  const s=summarize(w,now),out=[],task=(kind,id,patientId,family,title,owner,action,page,priority='Routine')=>out.push({kind,id,patientId,family,title,owner,action,page,priority});
  if(['coordinator','clinician','admin'].includes(role))s.drafts.forEach(p=>task('plan',p.id,p.patientId,p.family,'Treatment plan awaiting clinical review','Dentist / clinician',role==='clinician'?'Review plan':'View handoff','plans','Review needed'));
+ if(['coordinator','admin'].includes(role)){
+  s.approved.forEach(p=>{const v=(w.insurance||[]).filter(v=>v.planId===p.id).at(-1);if(!v||v.status!=='VERIFIED'||Date.parse(v.expiresAt)<=now)task('insurance',p.id,p.patientId,p.family,'Confirm insurance or choose self-pay','Nursing / coordination','Review coverage','insurance','Review needed');});
+ }
  if(role==='coordinator'){
   w.patients.filter(p=>!p.contactConsent).forEach(p=>task('patient',p.id,p.id,null,'Contact permission needs confirmation','Patient / care team','Open patient','crm','Consent needed'));
   s.approved.filter(p=>!(p.appointments||[]).some(a=>a.status==='SCHEDULED')).forEach(p=>task('plan',p.id,p.patientId,p.family,'Coordinate the next appointment','Nursing / coordination','Schedule visit','plans'));

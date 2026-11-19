@@ -56,3 +56,8 @@ The GrapesJS studio includes role-specific executive, clinical, nursing and pati
 ## Approval record
 
 This package is prepared for stakeholder review. Stakeholder names, feedback, decisions, conditions and approval dates should be recorded through the delivery governance process. No stakeholder endorsement is implied by this design document.
+
+
+## Insurance scope revision — November 18, 2026
+
+Insurance & Benefits Intelligence is part of the core product. Insured estimates now use recorded, current benefit evidence; self-pay remains separate. Contractual adjustments, deductible, annual maximum and insurer contribution determine the patient remainder used for financing. See [insurance scope](INSURANCE_SCOPE.md) for implemented behavior, acceptance criteria and the external payer integration gates. Live payer connectivity is not configured.

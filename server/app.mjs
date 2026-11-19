@@ -9,6 +9,7 @@ import {randomBytes,randomUUID} from 'node:crypto';
 import {openStore,passwordHash,checkPassword,hash} from './store.mjs';
 import {CATALOG,POLICY} from './catalog.mjs';
 import {estimate} from './pricing.mjs';
+import {createVerification,requireVerification,assertQuoteCoverage} from '../dist/insurance.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 class Failure extends Error {constructor(status,message){super(message);this.status=status;}}
 const fail=(status,message)=>{throw new Failure(status,message);};
@@ -50,11 +51,16 @@ export function createApplication(options={}) {
    if(!Number.isFinite(minutes)||minutes<15||minutes>180||!Number.isFinite(lab)||lab<0||lab>1500)fail(400,'Unsupported model inputs');
    return save('plan',{id:randomUUID(),patientId:body.patientId,version:0,family:c.code,minutes,lab,status:'DRAFT',appointments:[],created:new Date(clock()).toISOString()},user,'PLAN_CREATED');
   }
+  if(path==='/api/insurance'){
+   roles(user,'admin','coordinator');const plan=get(user,body.planId,'plan');let v;try{v=createVerification(body,{...plan,reference:CATALOG.find(c=>c.code===plan.family).reference},{now:clock(),actor:user.id});}catch(e){fail(400,e.message);}
+   v.version=0;return save('insurance',v,user,'INSURANCE_'+v.status,{source:v.source});
+  }
   if(path==='/api/quotes'){
    roles(user,'admin','coordinator');const plan=get(user,body.planId,'plan');
    version(plan,body.planVersion);if(store.list('quote').some(q=>q.planId===plan.id&&q.accepted))fail(409,'An accepted estimate already exists for this plan');if(plan.status!=='APPROVED'&&plan.status!=='SCHEDULED')fail(409,'An approved active clinical plan is required');
    if(body.benefits!=='CURRENT')fail(409,'Current synthetic benefits verification is required');
-   let priced;try{priced=estimate({...body,family:plan.family,minutes:plan.minutes,lab:plan.lab},model);}catch(e){fail(400,e.message);}
+   let verification=null;if(body.insurance){verification=store.list('insurance').filter(v=>v.planId===plan.id)[0];try{if(verification?.id!==body.verificationId)throw Error('Select the latest insurance verification');requireVerification(verification,plan,clock());}catch(e){fail(409,e.message);}}
+   let priced;try{priced=estimate({...body,benefitsRecord:verification,family:plan.family,minutes:plan.minutes,lab:plan.lab},model,clock());}catch(e){fail(400,e.message);}
    const e={...priced,id:randomUUID(),patientId:plan.patientId,planId:plan.id,planVersion:plan.version,version:0,input:{family:plan.family,minutes:plan.minutes,lab:plan.lab,insurance:body.insurance,loyalty:body.loyalty,financing:body.financing,deposit:body.deposit},accepted:false,created:new Date(clock()).toISOString(),expires:new Date(clock()+POLICY.quoteDays*86400000).toISOString()};return save('quote',e,user,'QUOTE_'+priced.route,{model:model.version,policy:POLICY.version});
   }
   const match=path.match(/^\/api\/(patients|plans|quotes|finance)\/([^/]+)\/([a-z-]+)$/);if(!match)fail(404,'Unknown command');
@@ -83,8 +89,9 @@ export function createApplication(options={}) {
    return save(kind,e,user,'PLAN_'+action.toUpperCase());
   }
   if(kind==='quote'){
+   if(action==='supersede'){roles(user,'admin','coordinator');if(e.route!=='ISSUED')fail(409,'Only an issued estimate can be replaced');if(store.list('finance').some(f=>f.quoteId===e.id&&!['DECLINED','WITHDRAWN','REFUNDED'].includes(f.status))||balance(e).paid!==0)fail(409,'Withdraw or reconcile financing and payments before replacement');e.accepted=false;e.route='SUPERSEDED';return save(kind,e,user,'ESTIMATE_SUPERSEDED');}
    if(action==='accept'){
-    roles(user,'patient','coordinator');if(e.route!=='ISSUED'||e.accepted)fail(409,'Estimate cannot be accepted');if(clock()>=Date.parse(e.expires))fail(409,'Estimate expired');
+    roles(user,'patient','coordinator');try{assertQuoteCoverage(e,store.list('insurance').reverse(),store.list('plan'),clock());}catch(err){fail(409,err.message);}if(e.route!=='ISSUED'||e.accepted)fail(409,'Estimate cannot be accepted');if(clock()>=Date.parse(e.expires))fail(409,'Estimate expired');
     const plan=get(user,e.planId,'plan');if(['DRAFT','CANCELLED','COMPLETED'].includes(plan.status))fail(409,'Clinical plan is not active');
     if(store.list('quote').some(q=>q.id!==e.id&&q.planId===e.planId&&q.accepted))fail(409,'Another estimate is already accepted for this plan');
     if(body.consent!==true)fail(400,'Explicit estimate acceptance consent is required');e.accepted=true;e.acceptedAt=new Date(clock()).toISOString();e.acceptedBy=user.id;return save(kind,e,user,'ESTIMATE_ACCEPTED',{consent:true});
@@ -98,7 +105,7 @@ export function createApplication(options={}) {
     return save('payment',{id:randomUUID(),patientId:e.patientId,quoteId:e.id,version:0,amount:body.amount,synthetic:true,created:new Date(clock()).toISOString()},user,'SYNTHETIC_PAYMENT_RECORDED');
    }
    if(action==='finance'){
-    roles(user,'patient','coordinator');if(!e.accepted||e.route!=='ISSUED')fail(409,'Accepted issued estimate required');
+    roles(user,'patient','coordinator');try{assertQuoteCoverage(e,store.list('insurance').reverse(),store.list('plan'),clock());}catch(err){fail(409,err.message);}if(!e.accepted||e.route!=='ISSUED')fail(409,'Accepted issued estimate required');
     if(body.consent!==true)fail(400,'Separate financing consent required');if(clock()>=Date.parse(e.expires))fail(409,'Estimate expired');
     const plan=get(user,e.planId,'plan');if(plan.status==='CANCELLED')fail(409,'Clinical plan is cancelled');
     const existing=store.list('finance').find(f=>f.quoteId===e.id&&!['DECLINED','WITHDRAWN','REFUNDED'].includes(f.status));if(existing)fail(409,'An application already exists');
@@ -112,7 +119,7 @@ export function createApplication(options={}) {
     const next=({offer:'OFFERED',decline:'DECLINED',fund:'FUNDED',refund:'REFUNDED'})[body.event];
     const valid=({PENDING:['OFFERED','DECLINED'],ACCEPTED:['FUNDED'],FUNDED:['REFUNDED']})[e.status]||[];
     if(!valid.includes(next))fail(409,'Out-of-order provider event');
-    const quote=get(user,e.quoteId,'quote');if(next==='FUNDED'&&(balance(quote).remaining<e.amount||get(user,quote.planId,'plan').status==='CANCELLED'))fail(409,'Funding no longer matches active plan and balance');e.status=next;
+    const quote=get(user,e.quoteId,'quote');if(next==='FUNDED')try{assertQuoteCoverage(quote,store.list('insurance').reverse(),store.list('plan'),clock());}catch(err){fail(409,err.message);}if(next==='FUNDED'&&(balance(quote).remaining<e.amount||get(user,quote.planId,'plan').status==='CANCELLED'))fail(409,'Funding no longer matches active plan and balance');e.status=next;
    }else if(action==='accept-offer'){
     roles(user,'patient','coordinator');if(body.consent!==true)fail(400,'Separate simulated offer consent required');if(e.status!=='OFFERED')fail(409,'No offer available');e.status='ACCEPTED';
    }else if(action==='withdraw'){
@@ -154,7 +161,7 @@ export function createApplication(options={}) {
     if(req.method==='GET'){
      if(path==='/api/session')return json(res,200,{user:{id:user.id,role:user.role},csrf:session.csrf});
      if(path==='/api/catalog')return json(res,200,{catalog:CATALOG,policy:POLICY,model});
-     if(path==='/api/workspace')return json(res,200,{patients:visible(user,'patient'),plans:visible(user,'plan'),quotes:visible(user,'quote').map(q=>q.route==='ISSUED'?{...q,ledger:balance(q)}:q),finance:visible(user,'finance'),payments:visible(user,'payment')});
+     if(path==='/api/workspace')return json(res,200,{patients:visible(user,'patient'),plans:visible(user,'plan'),quotes:visible(user,'quote').map(q=>q.route==='ISSUED'?{...q,ledger:balance(q)}:q),finance:visible(user,'finance'),payments:visible(user,'payment'),insurance:visible(user,'insurance').reverse()});
      if(path==='/api/audit'){roles(user,'admin','reviewer');return json(res,200,{verified:store.verify(),events:db.prepare('SELECT * FROM audit ORDER BY seq DESC LIMIT 500').all()});}
      const m=path.match(/^\/api\/quotes\/([^/]+)\/export$/);if(m){const q=get(user,m[1],'quote');return json(res,200,{syntheticOnly:true,quote:q,ledger:q.route==='ISSUED'?balance(q):null,events:db.prepare('SELECT time,actor,action,entity,details,digest FROM audit WHERE entity=? ORDER BY seq').all(q.id)});}
      fail(404,'API endpoint not found');
@@ -171,7 +178,7 @@ export function createApplication(options={}) {
    }
    if(req.method!=='GET'&&req.method!=='HEAD')fail(405,'Method not allowed');
    const relative=path==='/'?'index.html':decodeURIComponent(path.slice(1));
-   if(!['index.html','app.mjs','engine.mjs','styles.css','model.json','cost-model.json','catalog.mjs','pricing.mjs','icons.mjs','studio-adapter.mjs','workspaces.mjs','designer.html','designer.mjs','designer.css','design-screens.json','vendor/grapes.min.js','vendor/grapes.min.css','vendor/GRAPESJS-LICENSE.txt','vendor/version.json'].includes(relative))fail(404,'File not found');
+   if(!['index.html','app.mjs','engine.mjs','styles.css','model.json','cost-model.json','catalog.mjs','pricing.mjs','insurance.mjs','icons.mjs','studio-adapter.mjs','workspaces.mjs','designer.html','designer.mjs','designer.css','design-screens.json','vendor/grapes.min.js','vendor/grapes.min.css','vendor/GRAPESJS-LICENSE.txt','vendor/version.json'].includes(relative))fail(404,'File not found');
    const file=join(ROOT,'dist',relative);if(!existsSync(file))fail(404,'File not found');
    const assetHeaders=relative==='designer.html'?{...headers,'Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; frame-src 'self' blob:; frame-ancestors 'none'; form-action 'self'; base-uri 'self'"}:headers;
    res.writeHead(200,{...assetHeaders,'Content-Type':({'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.txt':'text/plain; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'})[extname(file)]});res.end(req.method==='HEAD'?undefined:readFileSync(file));

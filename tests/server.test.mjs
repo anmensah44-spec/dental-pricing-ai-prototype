@@ -8,6 +8,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createApplication} from '../server/app.mjs';
 import {CATALOG} from '../server/catalog.mjs';
+import {createVerification} from '../dist/insurance.mjs';
 import {estimate,decimalCents} from '../server/pricing.mjs';
 const model=JSON.parse(readFileSync(new URL('../dist/cost-model.json',import.meta.url)));
 test('exact decimal parsing rejects rounding, signs, scientific notation and excess precision',()=>{
@@ -16,8 +17,9 @@ test('exact decimal parsing rejects rounding, signs, scientific notation and exc
 });
 test('all 16 treatment families reconcile and respect permitted fee and margin constraints',()=>{
  for(const c of CATALOG)for(const insurance of [false,true])for(const loyalty of [false,true])for(const financing of [false,true]){
-  const q=estimate({family:c.code,minutes:c.minutes,lab:c.lab,deposit:0,insurance,loyalty,financing},model);
-  if(q.route==='REVIEW'){assert.equal(q.code,'INFEASIBLE');continue;}assert.equal(q.route,'ISSUED',c.code);assert.equal(q.net,q.patient+q.payer);assert.equal(q.balance+q.deposit,q.patient);
+  const benefitsRecord=insurance?createVerification({payer:'Aetna Dental',memberSuffix:'0044',source:'sample-active',serviceDate:new Date().toISOString().slice(0,10)},{id:'plan-test',patientId:'patient-001',family:c.code,reference:c.reference}):null;
+  const q=estimate({benefitsRecord,family:c.code,minutes:c.minutes,lab:c.lab,deposit:0,insurance,loyalty,financing},model);
+  if(q.route==='REVIEW'){assert.equal(q.code,'INFEASIBLE');continue;}assert.equal(q.route,'ISSUED',c.code);assert.equal(q.net,q.patient+q.payer+(q.adjustment||0));assert.equal(q.balance+q.deposit,q.patient);
   if(!insurance){assert.ok(q.gross>=c.reference*.95&&q.gross<=c.reference*1.05);assert.ok(BigInt(q.net-q.cost.upper-q.fee)*10000n>=BigInt(q.net)*3000n);}else{assert.equal(q.gross,c.reference);assert.equal(q.discount,0);}
  }
 });
@@ -58,10 +60,10 @@ test('server integration and complete synthetic patient journeys',async t=>{
   assert.equal((await call(coord,'/api/quotes',{planId:p.id,planVersion:p.version,benefits:'CURRENT'})).status,409);
  });
  await t.test('quote idempotency prevents duplicates and rejects conflicting key reuse',async()=>{
-  const p=await plan(),body={planId:p.id,planVersion:p.version,benefits:'CURRENT',deposit:10000,insurance:true,loyalty:true,financing:true},key='same-command-123';
+  const p=await plan();const v=await command(coord,'/api/insurance',{planId:p.id,payer:'Aetna Dental',memberSuffix:'0044',source:'sample-active',serviceDate:new Date(now).toISOString().slice(0,10)});const body={verificationId:v.id,planId:p.id,planVersion:p.version,benefits:'CURRENT',deposit:10000,insurance:true,loyalty:true,financing:true},key='same-command-123';
   const a=await call(coord,'/api/quotes',body,{'Idempotency-Key':key}),b=await call(coord,'/api/quotes',body,{'Idempotency-Key':key});assert.equal(a.status,200);assert.equal(a.body.id,b.body.id);
   assert.equal((await call(coord,'/api/quotes',{...body,deposit:20000},{'Idempotency-Key':key})).status,409);
-  accepted=a.body;assert.equal(accepted.discount,0);assert.equal(accepted.payer,50000);
+  accepted=a.body;assert.equal(accepted.discount,0);assert.equal(accepted.payer,71500);assert.equal(accepted.adjustment,27000);
  });
  await t.test('acceptance requires consent, correct role, active version and immutable money',async()=>{
   assert.equal((await call(director,`/api/quotes/${accepted.id}/accept`,{version:accepted.version,consent:true})).status,403);
@@ -129,6 +131,28 @@ test('server integration and complete synthetic patient journeys',async t=>{
  });
  await t.test('SQLite records, sessions and audit survive a server restart',async()=>{
   const before=(await call(coord,'/api/workspace')).body;await app.close();await start();const after=(await call(coord,'/api/workspace')).body;assert.equal(after.plans.length,before.plans.length);assert.equal(after.finance.length,before.finance.length);assert.equal(app.store.verify(),true);
+ });
+ await t.test('insurance HTTP workflow validates evidence, scopes records and refreshes accepted estimates',async()=>{
+  const p=await plan(),today=new Date(now).toISOString().slice(0,10),b={planId:p.id,payer:'Blue Cross Blue Shield Dental',memberSuffix:'0044',serviceDate:today,source:'manual',allowedAmount:120000,deductibleRemaining:10000,annualRemaining:50000,coverageBps:5000,sourceReference:'Portal reference 44',attested:true};
+  assert.equal((await call(patient,'/api/insurance',b)).status,403);
+  assert.equal((await call(coord,'/api/insurance',{...b,attested:false})).status,400);
+  assert.equal((await call(coord,'/api/quotes',{planId:p.id,planVersion:p.version,benefits:'CURRENT',insurance:true,deposit:0,loyalty:false,financing:false})).status,409);
+  let v=await command(coord,'/api/insurance',b),q=await quote(p,{insurance:true,verificationId:v.id});
+  assert.equal(q.payer,50000);assert.equal(q.patient,70000);assert.equal(q.adjustment,60000);
+  q=await command(coord,`/api/quotes/${q.id}/accept`,{version:q.version,consent:true});
+  v=await command(coord,'/api/insurance',{...b,annualRemaining:0});
+  assert.equal((await call(coord,`/api/quotes/${q.id}/finance`,{version:q.version,consent:true})).status,409);
+  q=await command(coord,`/api/quotes/${q.id}/supersede`,{version:q.version});assert.equal(q.route,'SUPERSEDED');
+  let refreshed=await quote(p,{insurance:true,verificationId:v.id});assert.equal(refreshed.payer,0);assert.equal(refreshed.patient,120000);
+  refreshed=await command(coord,`/api/quotes/${refreshed.id}/accept`,{version:refreshed.version,consent:true});
+  const f=await command(coord,`/api/quotes/${refreshed.id}/finance`,{version:refreshed.version,consent:true});assert.equal(f.amount,120000);
+  assert.equal((await call(coord,`/api/quotes/${refreshed.id}/supersede`,{version:refreshed.version})).status,409);
+  const other=await plan('FILL01','patient-002');await command(coord,'/api/insurance',{...b,planId:other.id});
+  assert.ok((await call(patient,'/api/workspace')).body.insurance.every(v=>v.patientId==='patient-001'));
+  const blocked=await plan();const pending=await command(coord,'/api/insurance',{...b,planId:blocked.id,source:'sample-incomplete'});
+  assert.equal((await call(coord,'/api/quotes',{planId:blocked.id,planVersion:blocked.version,benefits:'CURRENT',insurance:true,verificationId:pending.id,deposit:0,loyalty:false,financing:false})).status,409);
+  const stale=await plan();v=await command(coord,'/api/insurance',{...b,planId:stale.id});const original=now;now+=86400001;const fresh=await login('coordinator');assert.equal((await call(fresh,'/api/quotes',{planId:stale.id,planVersion:stale.version,benefits:'CURRENT',insurance:true,verificationId:v.id,deposit:0,loyalty:false,financing:false})).status,409);now=original;for(const [account,session] of [['coordinator',coord],['dentist',dentist],['director',director],['patient',patient],['reviewer',reviewer]])Object.assign(session,await login(account));
+  assert.equal(app.store.verify(),true);
  });
  await t.test('logout revokes session and health endpoint reports storage integrity',async()=>{
   assert.equal((await call(null,'/healthz')).body.auditVerified,true);await command(patient,'/api/logout',{});assert.equal((await call(patient,'/api/workspace')).status,401);

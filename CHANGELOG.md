@@ -1,3 +1,15 @@
+# Insurance scope release — November 18, 2026
+
+Product direction: Andrews Mensah.
+
+- Added Insurance & Benefits Intelligence to the core care-to-payment workflow.
+- Replaced the active pricing engine’s fixed payer allowance with recorded benefit evidence and exact-cent PPO allocation.
+- Added separate insured and self-pay paths, verification evidence, freshness and changed-source gates.
+- Restricted financing to the residual patient balance; added estimate supersession and renewed consent workflow.
+- Updated role worklists, patient profiles, decision ownership, leadership export and 16 GrapesJS canvases.
+- Added calculation, permission, failure-path, HTTP persistence and financing tests; 55 automated checks pass.
+- External payer connectivity, advanced plan rules and claims/remittance expansion are tracked in docs/INSURANCE_SCOPE.md.
+
 # Changelog
 
 ## 2.0.0 — 2026-11-18

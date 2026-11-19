@@ -27,3 +27,8 @@ The lender provider-event command is restricted to the local simulator and admin
 Legacy engine.mjs and model.json are retained for v1 regression evidence. The active server uses server/pricing.mjs and dist/cost-model.json. Legacy browser code is archived under demo/ and is not served.
 
 Product and architecture direction: **Andrews Mensah**. [Project status](../PROJECT_STATUS.md).
+
+
+## Insurance scope revision — November 18, 2026
+
+Insurance & Benefits Intelligence is part of the core product. Insured estimates now use recorded, current benefit evidence; self-pay remains separate. Contractual adjustments, deductible, annual maximum and insurer contribution determine the patient remainder used for financing. See [insurance scope](../INSURANCE_SCOPE.md) for implemented behavior, acceptance criteria and the external payer integration gates. Live payer connectivity is not configured.

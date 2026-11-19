@@ -42,7 +42,7 @@ npm ci
 npm start
 ```
 
-Open http://127.0.0.1:4173/. Select coordinator, dentist, reviewer, director or patient and choose **Open sample workspace**. The default project-account password is `Clarity-Demo-2026!`. The patient account is assigned to Demo patient 001. Records persist in SQLite across browser refresh and server restart.
+Open http://127.0.0.1:4173/. Select coordinator, dentist, reviewer, director or patient and choose **Open sample workspace**. Configure local account credentials through DEMO_PASSWORD before creating the database. The patient account is assigned to Demo patient 001. Records persist in SQLite across browser refresh and server restart.
 
 ## Explore the workflow
 
@@ -86,3 +86,8 @@ The validation record contains 46 passing checks, pricing matrices, HTTP workflo
 - [Project status, data provenance and integration environment](docs/PROJECT_STATUS.md)
 
 The repository is public and can be shared with recruiters and technical reviewers. GitHub hosts the source. The Node application uses authenticated SQLite records; the hosted browser studio provides the redesigned interactive walkthrough and editable design canvas. The Project status page records the evaluation-data setup, sandbox connections and external integration requirements in one place.
+
+
+## Insurance scope revision — November 18, 2026
+
+Insurance & Benefits Intelligence is part of the core product. Insured estimates now use recorded, current benefit evidence; self-pay remains separate. Contractual adjustments, deductible, annual maximum and insurer contribution determine the patient remainder used for financing. See [insurance scope](docs/INSURANCE_SCOPE.md) for implemented behavior, acceptance criteria and the external payer integration gates. Live payer connectivity is not configured.

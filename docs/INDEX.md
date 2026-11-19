@@ -20,3 +20,8 @@
 The current implementation is documented in architecture/SOLUTION.md. See [completion matrix](COMPLETENESS.md) and [operations](OPERATIONS.md) for runtime scope and recovery.
 
 Product and architecture direction: **Andrews Mensah**. [Project status](PROJECT_STATUS.md).
+
+
+## Insurance scope revision — November 18, 2026
+
+Insurance & Benefits Intelligence is part of the core product. Insured estimates now use recorded, current benefit evidence; self-pay remains separate. Contractual adjustments, deductible, annual maximum and insurer contribution determine the patient remainder used for financing. See [insurance scope](INSURANCE_SCOPE.md) for implemented behavior, acceptance criteria and the external payer integration gates. Live payer connectivity is not configured.
